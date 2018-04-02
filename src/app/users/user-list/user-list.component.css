@@ -67,6 +67,7 @@
 
 .header-text{
   color: #FF0000;
+  font-size: 14px;
 }
 
 .status-list{
@@ -116,6 +117,11 @@ mat-list-item.nv-list-item.mat-list-item {
 
 mat-list-item.active.mat-list-item {
     color: #FF0000;
+}
+
+/deep/.mat-list-item-content{
+  font-weight: 200;
+  font-size: 14px;
 }
 
 .header-action{
