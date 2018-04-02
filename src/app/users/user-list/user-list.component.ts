@@ -115,8 +115,14 @@ export class UserListComponent implements OnInit {
     let dialogRef = this.dialog.open(UserUpdateComponent, {
       width: '500px',
       data: {firstName: user.firstName, lastName: user.lastName,
-       birthDate: user.birthDate, id: user.id}
+       birthDate: user.birthDate, id: user.id, phoneNumber: user.phoneNumber}
     });
+  }
+
+  resetFilter(){
+     this.statusFilter = "All Cases";
+     this.countryList = [];
+     this.applyCustomFilter(this.statusFilter)
   }
 
   ngOnInit() {
@@ -139,28 +145,28 @@ export class UserListComponent implements OnInit {
 
 
 const USER_DATA: User[] = [
-  {id: 1, firstName: 'Complete', lastName: 'PV', birthDate: '1990-08-16', 'country': 'India', 'image':'image1',
-   'status': 'Incomplete'},
+  {id: 1, firstName: 'Shajith', lastName: 'PV', birthDate: '1990-08-16', 'country': 'India', 'image':'image1',
+   'status': 'Incomplete', 'phoneNumber': '1234567890'},
   {id: 2, firstName: 'David', lastName: 'warner', birthDate: '1980-07-16', 'country': 'Albania', 'image':'image1',
-  'status': 'Complete'},
-  {id: 3, firstName: 'Iain', lastName: 'Hume', birthDate: '1950-08-110', 'country': 'Algeria', 'image':'image1',
-  'status': 'Complete'},
+  'status': 'Complete', 'phoneNumber': '1234567890'},
+  {id: 3, firstName: 'Iain', lastName: 'Hume', birthDate: '1950-08-11', 'country': 'Algeria', 'image':'image1',
+  'status': 'Complete', 'phoneNumber': '1234567890'},
   {id: 4, firstName: 'Jithin', lastName: 'PV', birthDate: '1993-08-16', 'country': 'India', 'image':'image1',
-  'status': 'Incomplete'},
+  'status': 'Incomplete', 'phoneNumber': '1234567890'},
   {id: 5, firstName: 'Melvin', lastName: 'Mathew', birthDate: '1970-01-01', 'country': 'Singapore', 'image':'image1',
-  'status': 'Complete'},
+  'status': 'Complete', 'phoneNumber': '1234567890'},
   {id: 6, firstName: 'Jithin', lastName: 'PV', birthDate: '1993-08-16', 'country': 'Singapore', 'image':'image1',
-  'status': 'Complete'},
+  'status': 'Complete', 'phoneNumber': '1234567890'},
   {id: 7, firstName: 'Justin', lastName: 'Langer', birthDate: '1992-07-01', 'country': 'Australia', 'image':'image1',
-  'status': 'Incomplete'},
+  'status': 'Incomplete', 'phoneNumber': '1234567890'},
   {id: 8, firstName: 'Saleem', lastName: 'Malik', birthDate: '1995-11-11', 'country': 'Pakistan', 'image':'image1',
-  'status': 'Complete'},
+  'status': 'Complete', 'phoneNumber': '1234567890'},
   {id: 9, firstName: 'Vivek', lastName: 'Singh', birthDate: '1983-02-16', 'country': 'India', 'image':'image1',
-  'status': 'Complete'},
+  'status': 'Complete', 'phoneNumber': '1234567890'},
   {id: 10, firstName: 'George', lastName: 'bush', birthDate: '1953-03-11', 'country': 'United States of America (USA)', 'image':'image1',
-  'status': 'Incomplete'},
+  'status': 'Incomplete', 'phoneNumber': '1234567890'},
   {id: 11, firstName: 'Muhammed', lastName: 'Haneef', birthDate: '2000-07-28', 'country': 'India', 'image':'image1',
-  'status': 'Incomplete'}
+  'status': 'Incomplete', 'phoneNumber': '1234567890'}
 
 ];
 

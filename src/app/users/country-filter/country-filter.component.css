@@ -6,6 +6,7 @@
  min-width: 0!important;
  padding: 3px!important;
  margin: 3px!important;
+ font-size: 20px;
 }
 
 .country-list{
@@ -19,6 +20,8 @@
    color: #000000;
    padding: 5px;
    margin: 2px;
+   font-weight: 200;
+   font-size: 12px;
 }
 
 .country-item.active{
@@ -39,8 +42,14 @@
   color: #FF0000;
   padding: 5px;
   margin: 2px;
+  font-size: 12px;
+  font-weight: 200;
 }
 
 .selected-country-item img{
   width: 12px;
+}
+
+/deep/.mat-tab-label-active{
+  color: #FF0000;
 }

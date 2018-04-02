@@ -38,7 +38,7 @@
             <a class="header-action" (click)="toggleCountryFilter()">{{countryList.length}} Countries</a>
         </div>
         <div class="reset-column">
-            <a class="reset-action">Reset Filters</a>
+            <a class="reset-action" (click)="resetFilter()">Reset Filters</a>
         </div>
         <div class="search-column">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" class="search-text">
@@ -95,7 +95,7 @@
         <!-- Birth Date Column -->
         <ng-container matColumnDef="birthDate">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Birth Date </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.birthDate}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.birthDate | date: 'MM-dd-yyyy'}} </mat-cell>
         </ng-container>
 
         <!-- Country Column -->
@@ -107,13 +107,13 @@
         <!-- Status Column -->
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Uncomplete </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+          <mat-cell *matCellDef="let element" [ngStyle]="{'color': element.status === 'Complete' ? 'green' : 'red'}"> {{element.status}} </mat-cell>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <a (click)="openDialog(element)">Update</a> </mat-cell>
+          <mat-cell *matCellDef="let element"> <a (click)="openDialog(element)"><img src="assets/edit.svg" class="edit-icon"></a> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

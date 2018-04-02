@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatCheckboxModule, MatSidenavModule, MatListModule,  MatPaginatorModule,
-  MatSortModule, MatGridListModule, MatTabsModule
+  MatSortModule, MatGridListModule, MatTabsModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +46,9 @@ import { CountryFilterComponent } from './users/country-filter/country-filter.co
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   entryComponents: [UserListComponent, UserUpdateComponent],
   providers: [AuthService, UserService],

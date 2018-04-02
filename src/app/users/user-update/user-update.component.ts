@@ -22,7 +22,6 @@ export class UserUpdateComponent {
   }
 
   onYesClick(): void {
-    alert(this.data.id)
     this.updateUser(this.data)
     this.dialogRef.close();
   }

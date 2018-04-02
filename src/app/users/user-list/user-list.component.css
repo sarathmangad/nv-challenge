@@ -131,6 +131,11 @@ mat-list-item.active.mat-list-item {
   font-size: 12px;
 }
 
+.edit-icon{
+  width: 15px;
+  cursor: pointer;
+}
+
 
 
 

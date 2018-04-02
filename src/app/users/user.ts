@@ -6,6 +6,7 @@ export class User {
     country = '';
     image = '';
     status = '';
+    phoneNumber = '';
 
     constructor(values: Object = {}) {
       Object.assign(this, values);
