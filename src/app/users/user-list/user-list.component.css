@@ -1,0 +1,114 @@
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mat-column-select {
+  overflow: visible;
+}
+
+.nv-container{
+ background: #f1f2f2;
+ height: 100vh;
+}
+
+.nv-list{
+  width: 250px;
+  color: #ffffff
+}
+
+.nv-sidebar{
+  background: #241b22;
+}
+
+.nv-header{
+ margin: 20px;
+ background: #ffffff;
+}
+
+.nv-table{
+ margin: 20px;
+ background: #ffffff;
+}
+
+.nv-paginate{
+ margin: 20px;
+ background: #ffffff;
+}
+
+.header-row{
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+}
+
+.status-column{
+    flex-basis: 20%;
+}
+
+.country-column{
+    flex-basis: 20%;
+}
+
+.reset-column{
+    flex-basis: 20%;
+}
+
+.search-column{
+    flex-basis: 40%;
+}
+
+.search-text{
+    width: 100%;
+    height: 25px;
+    background: #f1f2f2;
+}
+
+.header-text{
+  color: #ed0707;
+}
+
+.status-list{
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  flex: 1;
+}
+
+.status-content{
+  background: #f1f2f2;
+  color: #ffffff;
+  padding: 5px;
+  margin: 2px;
+}
+
+.left-tool{
+  width: 50%;
+}
+
+.right-tool{
+  width: 50%;
+}
+
+button.mat-button {
+    float: right;
+}
+.client-name{
+  font-size: 14px;
+}
+
+.mat-toolbar {
+    background: #ffffff;
+    color: rgba(0,0,0,.87);
+}
+
+mat-list-item.nv-list-item.mat-list-item {
+    color: #ffffff;
+}
+
+mat-list-item.active.mat-list-item {
+    color: #ca1a1a;
+}
+
+

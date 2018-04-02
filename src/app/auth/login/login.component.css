@@ -1,0 +1,23 @@
+
+.login-card {
+  width: 400px;
+  height: 200px;
+  margin: 10% auto;
+}
+
+.login-table{
+  width: 100%;
+}
+
+.login-form-field{
+  width: 100%;
+}
+
+.login-button {
+  float: right;
+  background-color: #FF0000;
+}
+
+/deep/.mat-input-element {
+    caret-color: #000000;
+}

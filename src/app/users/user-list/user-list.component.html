@@ -1,0 +1,150 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="left-tool">
+      <span><img src=""></span>
+      <span class="client-name">Client name</span>
+      <span class="client-name">Company name</span>
+    </div>
+    <div class="right-tool">
+       <button mat-button (click)="logout()">Logout</button>
+      <button mat-button>Settings</button>
+
+    </div>
+
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<mat-drawer-container class="nv-container">
+
+  <mat-drawer mode="side" opened="true" class="nv-sidebar">
+
+    <mat-list  class="nv-list">
+     <mat-list-item class="nv-list-item active"> Cases </mat-list-item>
+     <mat-list-item class="nv-list-item"> Create </mat-list-item>
+     <mat-list-item class="nv-list-item"> Admin </mat-list-item>
+    </mat-list>
+
+
+  </mat-drawer>
+
+
+  <mat-drawer-content class="nv-main-content">
+
+    <mat-card class="nv-header">
+      <div class="header-row">
+        <div class="status-column">
+            <span class="header-text">Status</span><br>
+            <a (click)="toggleStatusFilter()">{{statusFilter}}</a>
+        </div>
+        <div class="country-column">
+            <span class="header-text">Country</span><br>
+            <a (click)="toggleCountryFilter()">{{countryList.length}} Countries</a>
+        </div>
+        <div class="reset-column">
+            <span>Reset Filters</span>
+        </div>
+        <div class="search-column">
+
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" class="search-text">
+
+        </div>
+
+      </div>
+
+      <div class="content-row">
+        <div class="status-list" *ngIf ="showStatusFilter">
+          <div class="status-content" *ngFor="let status of getAllStatus()" (click)="applyCustomFilter(status)">{{status}}</div>
+        </div>
+
+        <div class="country-list" [hidden]="!showCountryFilter">
+            <app-country-filter (selectedCountryChange)="onCountryChange($event)">  </app-country-filter>
+        </div>
+
+      </div>
+
+    </mat-card>
+
+    <!--<mat-card>-->
+
+    <mat-table #table [dataSource]="dataSource" matSort class="nv-table">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!-- IMG Column -->
+        <ng-container matColumnDef="image">
+          <mat-header-cell *matHeaderCellDef> IMG </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.image}} </mat-cell>
+        </ng-container>
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+        </ng-container>
+
+         <!-- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+        </ng-container>
+
+        <!-- Birth Date Column -->
+        <ng-container matColumnDef="birthDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Birth Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.birthDate}} </mat-cell>
+        </ng-container>
+
+        <!-- Country Column -->
+        <ng-container matColumnDef="country">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Country </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.country}} </mat-cell>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Uncomplete </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <a (click)="openDialog(element)">Update</a> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 (click)="selection.toggle(row)">
+        </mat-row>
+      </mat-table>
+
+    <!--</mat-card>-->
+
+    <mat-card class="nv-paginate">
+      <mat-paginator #paginator
+              [pageSize]="3" >
+      </mat-paginator>
+
+    </mat-card>
+
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
