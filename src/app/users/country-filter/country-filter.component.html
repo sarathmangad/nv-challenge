@@ -12,5 +12,6 @@
 <div class="selected-countries">
       <div class="selected-country-item" *ngFor="let country of selectedCountries">
         {{country}}
+        <img src="assets/times-circle.svg" (click)="removeFromSelectedList(selectedCountries.indexOf(country))">
       </div>
 </div>

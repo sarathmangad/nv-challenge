@@ -27,3 +27,20 @@
    padding: 5px;
    margin: 2px;
 }
+
+.selected-countries{
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+  flex: 1;
+}
+
+.selected-country-item{
+  color: #FF0000;
+  padding: 5px;
+  margin: 2px;
+}
+
+.selected-country-item img{
+  width: 12px;
+}
