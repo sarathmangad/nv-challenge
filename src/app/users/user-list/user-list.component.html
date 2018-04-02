@@ -18,21 +18,15 @@
 
 
 <mat-drawer-container class="nv-container">
-
   <mat-drawer mode="side" opened="true" class="nv-sidebar">
-
     <mat-list  class="nv-list">
      <mat-list-item class="nv-list-item active"> Cases </mat-list-item>
      <mat-list-item class="nv-list-item"> Create </mat-list-item>
      <mat-list-item class="nv-list-item"> Admin </mat-list-item>
     </mat-list>
-
-
   </mat-drawer>
 
-
   <mat-drawer-content class="nv-main-content">
-
     <mat-card class="nv-header">
       <div class="header-row">
         <div class="status-column">
@@ -47,30 +41,22 @@
             <span>Reset Filters</span>
         </div>
         <div class="search-column">
-
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" class="search-text">
-
         </div>
-
       </div>
-
       <div class="content-row">
         <div class="status-list" *ngIf ="showStatusFilter">
           <div class="status-content" *ngFor="let status of getAllStatus()" (click)="applyCustomFilter(status)">{{status}}</div>
         </div>
-
         <div class="country-list" [hidden]="!showCountryFilter">
             <app-country-filter (selectedCountryChange)="onCountryChange($event)">  </app-country-filter>
         </div>
-
       </div>
-
     </mat-card>
 
     <!--<mat-card>-->
 
     <mat-table #table [dataSource]="dataSource" matSort class="nv-table">
-
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
           <mat-header-cell *matHeaderCellDef>
@@ -141,9 +127,7 @@
       <mat-paginator #paginator
               [pageSize]="3" >
       </mat-paginator>
-
     </mat-card>
-
 
   </mat-drawer-content>
 </mat-drawer-container>

@@ -40,7 +40,6 @@ export class UserListComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    //this.dataSource.slice(0, 3)
   }
 
   applyCustomFilter(filterValue: string){
@@ -57,7 +56,6 @@ export class UserListComponent implements OnInit {
       this.dataSource.filterPredicate = (data: User, filter: string) => data.status == filterValue ||
       filterValue === 'All Cases';
     }
-
     this.dataSource.filter = filterValue;
   }
 
@@ -103,6 +101,7 @@ export class UserListComponent implements OnInit {
 
     this.showCountryFilter = false;
   }
+
   toggleCountryFilter(){
     if(this.showCountryFilter)
       this.showCountryFilter = false;
@@ -112,7 +111,7 @@ export class UserListComponent implements OnInit {
     this.showStatusFilter = false;
   }
 
-   openDialog(user): void {
+  openDialog(user): void {
     let dialogRef = this.dialog.open(UserUpdateComponent, {
       width: '500px',
       data: {firstName: user.firstName, lastName: user.lastName,
@@ -139,22 +138,30 @@ export class UserListComponent implements OnInit {
 }
 
 
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 const USER_DATA: User[] = [
   {id: 1, firstName: 'Complete', lastName: 'PV', birthDate: '1990-08-16', 'country': 'India', 'image':'image1',
    'status': 'Incomplete'},
-  {id: 2, firstName: 'Sarath', lastName: 'PV', birthDate: '1990-08-16', 'country': 'Albania', 'image':'image1',
+  {id: 2, firstName: 'David', lastName: 'warner', birthDate: '1980-07-16', 'country': 'Albania', 'image':'image1',
   'status': 'Complete'},
-  {id: 3, firstName: 'Sarath', lastName: 'PV', birthDate: '1990-08-16', 'country': 'Algeria', 'image':'image1',
+  {id: 3, firstName: 'Iain', lastName: 'Hume', birthDate: '1950-08-110', 'country': 'Algeria', 'image':'image1',
   'status': 'Complete'},
-  {id: 4, firstName: 'Sarath', lastName: 'PV', birthDate: '1990-08-16', 'country': 'India', 'image':'image1',
-  'status': 'Complete'}
+  {id: 4, firstName: 'Jithin', lastName: 'PV', birthDate: '1993-08-16', 'country': 'India', 'image':'image1',
+  'status': 'Incomplete'},
+  {id: 5, firstName: 'Melvin', lastName: 'Mathew', birthDate: '1970-01-01', 'country': 'Singapore', 'image':'image1',
+  'status': 'Complete'},
+  {id: 6, firstName: 'Jithin', lastName: 'PV', birthDate: '1993-08-16', 'country': 'Singapore', 'image':'image1',
+  'status': 'Complete'},
+  {id: 7, firstName: 'Justin', lastName: 'Langer', birthDate: '1992-07-01', 'country': 'Australia', 'image':'image1',
+  'status': 'Incomplete'},
+  {id: 8, firstName: 'Saleem', lastName: 'Malik', birthDate: '1995-11-11', 'country': 'Pakistan', 'image':'image1',
+  'status': 'Complete'},
+  {id: 9, firstName: 'Vivek', lastName: 'Singh', birthDate: '1983-02-16', 'country': 'India', 'image':'image1',
+  'status': 'Complete'},
+  {id: 10, firstName: 'George', lastName: 'bush', birthDate: '1953-03-11', 'country': 'United States of America (USA)', 'image':'image1',
+  'status': 'Incomplete'},
+  {id: 11, firstName: 'Muhammed', lastName: 'Haneef', birthDate: '2000-07-28', 'country': 'India', 'image':'image1',
+  'status': 'Incomplete'}
+
 ];
 
 const STATUS_LIST = ["All Cases", "Complete", "Incomplete"]
