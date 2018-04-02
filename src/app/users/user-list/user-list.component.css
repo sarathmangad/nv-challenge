@@ -19,7 +19,7 @@
 }
 
 .nv-sidebar{
-  background: #241b22;
+  background: #000000;
 }
 
 .nv-header{
@@ -66,7 +66,7 @@
 }
 
 .header-text{
-  color: #ed0707;
+  color: #FF0000;
 }
 
 .status-list{
@@ -78,6 +78,13 @@
 
 .status-content{
   background: #f1f2f2;
+  color: #000000;
+  padding: 5px;
+  margin: 2px;
+}
+
+.status-content.active{
+  background: #000000;
   color: #ffffff;
   padding: 5px;
   margin: 2px;
@@ -108,7 +115,23 @@ mat-list-item.nv-list-item.mat-list-item {
 }
 
 mat-list-item.active.mat-list-item {
-    color: #ca1a1a;
+    color: #FF0000;
 }
+
+.header-action{
+  color:#767171;
+  cursor: pointer;
+  text-decoration-line: underline;
+  font-size: 12px;
+}
+
+.reset-action{
+  color:#767171;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+
+
 
 

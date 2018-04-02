@@ -31,14 +31,14 @@
       <div class="header-row">
         <div class="status-column">
             <span class="header-text">Status</span><br>
-            <a (click)="toggleStatusFilter()">{{statusFilter}}</a>
+            <a class="header-action" (click)="toggleStatusFilter()">{{statusFilter}}</a>
         </div>
         <div class="country-column">
             <span class="header-text">Country</span><br>
-            <a (click)="toggleCountryFilter()">{{countryList.length}} Countries</a>
+            <a class="header-action" (click)="toggleCountryFilter()">{{countryList.length}} Countries</a>
         </div>
         <div class="reset-column">
-            <span>Reset Filters</span>
+            <a class="reset-action">Reset Filters</a>
         </div>
         <div class="search-column">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" class="search-text">
@@ -46,7 +46,8 @@
       </div>
       <div class="content-row">
         <div class="status-list" *ngIf ="showStatusFilter">
-          <div class="status-content" *ngFor="let status of getAllStatus()" (click)="applyCustomFilter(status)">{{status}}</div>
+          <div class="status-content" *ngFor="let status of getAllStatus()" (click)="applyCustomFilter(status)"
+               [ngClass]= "{'active':  statusFilter == status}">{{status}}</div>
         </div>
         <div class="country-list" [hidden]="!showCountryFilter">
             <app-country-filter (selectedCountryChange)="onCountryChange($event)">  </app-country-filter>
