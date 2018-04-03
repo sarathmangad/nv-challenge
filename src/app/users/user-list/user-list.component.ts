@@ -15,55 +15,85 @@ import { AuthService } from 'app/auth/auth.service'
 })
 export class UserListComponent implements OnInit {
 
-  constructor(private userService : UserService, public dialog: MatDialog, private authService : AuthService) { }
-  displayedColumns = ['select', 'image', 'firstName', 'lastName', 'birthDate', 'country', 'status', 'action'];
-
+  constructor(private userService : UserService, public dialog: MatDialog,
+                                    private authService : AuthService) { }
+  displayedColumns = ['select', 'image', 'firstName', 'lastName', 'birthDate', 'country',
+                      'status', 'action'];
   dataSource = new MatTableDataSource<User>(this.getUsers());
-
   selection = new SelectionModel<User>(true, []);
 
-  statusFilter = "";
-  filterCountries = 0
+
+  filterCountries = 0;
   showStatusFilter = false;
   showCountryFilter = false;
-  countryList = [];
   currentPage = "Cases";
+
+  statusFilterText = "All Cases";
+  defaultFilterText = "";
+  countryFilterList = [];
+
+  applyFilter(){
+      if(this.defaultFilterText != "" && this.statusFilterText != "All Cases"
+      && this.countryFilterList.length > 0){
+          this.dataSource.filterPredicate = (data: User, filter) =>
+                         (data.firstName.toLowerCase().indexOf(this.defaultFilterText) > -1 ||
+                          data.lastName.toLowerCase().indexOf(this.defaultFilterText) > -1 ) &&
+                          (data.status.indexOf(this.statusFilterText) > -1) &&
+                          (this.countryFilterList.indexOf(data.country) > -1);
+      }
+      else if(this.defaultFilterText != "" && this.statusFilterText != "All Cases"){
+          this.dataSource.filterPredicate = (data: User, filter) =>
+                          (data.firstName.toLowerCase().indexOf(this.defaultFilterText) > -1 ||
+                          data.lastName.toLowerCase().indexOf(this.defaultFilterText) > -1 ) &&
+                          (data.status.indexOf(this.statusFilterText) > -1);
+      }
+      else if(this.defaultFilterText != "" && this.countryFilterList.length > 0){
+          this.dataSource.filterPredicate = (data: User, filter) =>
+                          (data.firstName.toLowerCase().indexOf(this.defaultFilterText) > -1 ||
+                          data.lastName.toLowerCase().indexOf(this.defaultFilterText) > -1) &&
+                          (this.countryFilterList.indexOf(data.country) > -1);
+      }
+      else if(this.statusFilterText != "All Cases" && this.countryFilterList.length > 0){
+          this.dataSource.filterPredicate = (data: User, filter) =>
+                                    (data.status.indexOf(this.statusFilterText) > -1) &&
+                                    (this.countryFilterList.indexOf(data.country) > -1);
+      }
+      else if(this.defaultFilterText != ""){
+          this.dataSource.filterPredicate = (data: User, filter) =>
+                            data.firstName.toLowerCase().indexOf(this.defaultFilterText) > -1 ||
+                            data.lastName.toLowerCase().indexOf(this.defaultFilterText) > -1 ;
+      }
+      else if(this.statusFilterText != "All Cases"){
+          this.dataSource.filterPredicate = (data: User, filter) =>
+                           data.status.indexOf(this.statusFilterText) > -1;
+      }
+      else if(this.countryFilterList.length > 0){
+          this.dataSource.filterPredicate =
+          (data: User, filter) => this.countryFilterList.indexOf(data.country) > -1 ;
+      }
+      else{
+          this.dataSource.filterPredicate = (data: User, allCase) => allCase === 'All Cases';
+      }
+      this.dataSource.filter = 'All Cases';
+  }
+
+  resetFilter(){
+     this.statusFilterText = "All Cases";
+     this.countryFilterList = [];
+     this.applyFilter();
+  }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   onCountryChange(countryList) {
-    this.countryList = countryList;
-    this.applyCustomFilter(this.statusFilter)
+    this.countryFilterList = countryList;
+    this.applyFilter();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  applyCustomFilter(filterValue: string){
-    filterValue = filterValue.trim(); // Remove whitespace
-    if(this.showStatusFilter){
-      this.statusFilter = filterValue;
-    }
-    if(this.countryList.length > 0){
-      this.dataSource.filterPredicate =
-    (data: User, filter: string) => (data.status == filterValue && this.countryList.indexOf(data.country) >=0) ||
-     (filterValue === 'All Cases' && this.countryList.indexOf(data.country) >=0);
-    }
-    else{
-      this.dataSource.filterPredicate = (data: User, filter: string) => data.status == filterValue ||
-      filterValue === 'All Cases';
-    }
-    this.dataSource.filter = filterValue;
-  }
-
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    this.dataSource.filter = filterValue;
-    console.log(filterValue)
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -93,12 +123,10 @@ export class UserListComponent implements OnInit {
   }
 
   toggleStatusFilter(){
-
     if(this.showStatusFilter)
       this.showStatusFilter = false;
     else
       this.showStatusFilter = true;
-
     this.showCountryFilter = false;
   }
 
@@ -107,7 +135,6 @@ export class UserListComponent implements OnInit {
       this.showCountryFilter = false;
     else
       this.showCountryFilter = true;
-
     this.showStatusFilter = false;
   }
 
@@ -119,22 +146,13 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  resetFilter(){
-     this.statusFilter = "All Cases";
-     this.countryList = [];
-     this.applyCustomFilter(this.statusFilter)
-  }
-
   ngOnInit() {
     this.authService.canActive();
     let user = new User();
-    //user = {'title' : 'Task1', 'complete': false, 'id' : null , category: 1 };
     for(var i in USER_DATA){
       user = USER_DATA[i]
       this.addUser(user)
     }
-    this.statusFilter = "All Cases";
-
   }
 
   logout(){
@@ -167,7 +185,7 @@ const USER_DATA: User[] = [
   'status': 'Incomplete', 'phoneNumber': '1234567890'},
   {id: 11, firstName: 'Muhammed', lastName: 'Haneef', birthDate: '2000-07-28', 'country': 'India', 'image':'image1',
   'status': 'Incomplete', 'phoneNumber': '1234567890'}
-
 ];
+
 
 const STATUS_LIST = ["All Cases", "Complete", "Incomplete"]
