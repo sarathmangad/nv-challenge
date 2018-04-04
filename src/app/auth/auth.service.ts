@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 
 @Injectable()
-export class AuthService{
+export class AuthService implements CanActivate{
   loginEmail = "test@nv.com";
   loginPassword = "tested"
   constructor(private router: Router) { }
@@ -23,7 +23,7 @@ export class AuthService{
       this.router.navigate(['/login']);
   }
 
-  canActive(){
+  canActivate(){
     if (localStorage.getItem('userId')) {
         return true;
     }

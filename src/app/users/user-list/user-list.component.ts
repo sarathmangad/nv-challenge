@@ -147,7 +147,6 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.canActive();
     let user = new User();
     for(var i in USER_DATA){
       user = USER_DATA[i]

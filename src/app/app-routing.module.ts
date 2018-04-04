@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { UserListComponent } from './users/user-list/user-list.component'
 import { LoginComponent } from './auth/login/login.component'
+import { AuthService } from './auth/auth.service'
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [AuthService]
   },
   {
     path: 'login',
