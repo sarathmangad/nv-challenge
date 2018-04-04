@@ -10,14 +10,29 @@
         <tr>
           <td>
             <mat-form-field class="login-form-field">
-              <input matInput placeholder="Username" [(ngModel)]="model.username" name="username" required>
+              <input matInput placeholder="Email" [(ngModel)]="email" name="email"
+                     [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </td>
         </tr>
         <tr>
           <td>
             <mat-form-field class="login-form-field">
-              <input matInput placeholder="Password" [(ngModel)]="model.password" type="password" name="password" required>
+              <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password"
+              [formControl]="passwordFormControl" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+                Please enter a valid password
+              </mat-error>
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </td>
         </tr>

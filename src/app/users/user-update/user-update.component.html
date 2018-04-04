@@ -5,18 +5,41 @@
 <div mat-dialog-content>
   <h1 class="dialog-content-title" >User Details</h1>
   <mat-form-field class="update-form-field">
-    <input matInput [(ngModel)]="data.firstName" placeholder="First name">
+    <input matInput [(ngModel)]="data.firstName" placeholder="First name"
+    [formControl]="firstNameControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="firstNameControl.hasError('required')">
+      First name is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="update-form-field">
-    <input matInput [(ngModel)]="data.lastName" placeholder="Last name">
+    <input matInput [(ngModel)]="data.lastName" placeholder="Last name"
+    [formControl]="lastNameControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="lastNameControl.hasError('required')">
+      Last name is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="update-form-field">
-    <input matInput  [(ngModel)]="data.phoneNumber" placeholder="Phone Number">
+    <input matInput  [(ngModel)]="data.phoneNumber" placeholder="Phone Number"
+           [formControl]="phoneNumberControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="phoneNumberControl.hasError('pattern') && !phoneNumberControl.hasError('required')">
+      Please enter a valid phone number
+    </mat-error>
+    <mat-error *ngIf="phoneNumberControl.hasError('required')">
+      Phone number is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="update-form-field">
-    <input matInput [(ngModel)]="data.birthDate"  [matDatepicker]="picker" placeholder="Birth Date">
+    <input matInput [(ngModel)]="data.birthDate"  [matDatepicker]="picker" placeholder="Birth Date"
+           [formControl]="birthDateControl" [errorStateMatcher]="matcher">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+
+    <mat-error *ngIf="birthDateControl.hasError('pattern') && !birthDateControl.hasError('required')">
+      Please enter a valid date
+    </mat-error>
+    <mat-error *ngIf="birthDateControl.hasError('required')">
+      Birth date is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
 </div>
 
@@ -24,6 +47,6 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" class="cancel-button">Cancel</button>
-  <button mat-button (click)="onYesClick()" cdkFocusInitial class="update-button">Update Account</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial class="update-button" >Update Account</button>
 </div>
 
