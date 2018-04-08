@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { NvErrorStateMatcher } from 'app/auth/login/login.component'
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 
 
@@ -29,7 +28,6 @@ export class UserUpdateComponent {
     this.dialogRef.close();
   }
 
-  matcher = new NvErrorStateMatcher();
   phoneNumberControl = new FormControl('', [
     Validators.required,
     Validators.pattern("^[0-9]{10}$")

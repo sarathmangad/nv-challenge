@@ -6,21 +6,21 @@
   <h1 class="dialog-content-title" >User Details</h1>
   <mat-form-field class="update-form-field">
     <input matInput [(ngModel)]="data.firstName" placeholder="First name"
-    [formControl]="firstNameControl" [errorStateMatcher]="matcher">
+    [formControl]="firstNameControl">
     <mat-error *ngIf="firstNameControl.hasError('required')">
       First name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="update-form-field">
     <input matInput [(ngModel)]="data.lastName" placeholder="Last name"
-    [formControl]="lastNameControl" [errorStateMatcher]="matcher">
+    [formControl]="lastNameControl">
     <mat-error *ngIf="lastNameControl.hasError('required')">
       Last name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="update-form-field">
     <input matInput  [(ngModel)]="data.phoneNumber" placeholder="Phone Number"
-           [formControl]="phoneNumberControl" [errorStateMatcher]="matcher">
+           [formControl]="phoneNumberControl" >
     <mat-error *ngIf="phoneNumberControl.hasError('pattern') && !phoneNumberControl.hasError('required')">
       Please enter a valid phone number
     </mat-error>
@@ -30,7 +30,7 @@
   </mat-form-field>
   <mat-form-field class="update-form-field">
     <input matInput [(ngModel)]="data.birthDate"  [matDatepicker]="picker" placeholder="Birth Date"
-           [formControl]="birthDateControl" [errorStateMatcher]="matcher">
+           [formControl]="birthDateControl" >
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
 
@@ -47,6 +47,8 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" class="cancel-button">Cancel</button>
-  <button mat-button (click)="onYesClick()" cdkFocusInitial class="update-button" >Update Account</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial class="update-button"
+          [disabled]="!phoneNumberControl.valid || !birthDateControl.valid ||
+           !firstNameControl.valid || !lastNameControl.valid" >Update Account</button>
 </div>
 
